@@ -1,0 +1,1398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ChildrenSmart – Dress Their Adventure</title>
+
+  <!-- Google Fonts: Nunito (playful body) + Baloo 2 (display headlines) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet"/>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- =====================================================================
+       GLOBAL STYLES & CSS CUSTOM PROPERTIES
+       All colours, transitions, and reusable classes are defined here so
+       team members only need to edit one place to restyle the site.
+  ====================================================================== -->
+  <style>
+    /* ---------- CSS Variables (design tokens) ---------- */
+    :root {
+      --brand-red:     #e02020;   /* navbar background                */
+      --brand-red-dk:  #b91c1c;   /* darker red for hover states       */
+      --brand-yellow:  #fde68a;   /* pastel yellow (hero bg)           */
+      --brand-green:   #bbf7d0;   /* soft green accent                 */
+      --brand-peach:   #fcd5b5;   /* warm peach card highlight         */
+      --brand-blue:    #bfdbfe;   /* soft sky-blue accent              */
+      --cta-orange:    #f97316;   /* Shop Now button                   */
+      --cta-orange-dk: #ea580c;
+      --text-dark:     #1e293b;
+      --text-mid:      #475569;
+      --footer-bg:     #fef9ee;   /* very light warm cream             */
+    }
+
+    /* ---------- Base ---------- */
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Nunito', sans-serif;
+      color: var(--text-dark);
+      margin: 0;
+      /* Push body content right by sidebar width on desktop */
+    }
+
+    /* ---------- Section headings ---------- */
+    .section-title {
+      font-family: 'Baloo 2', cursive;
+      font-size: 1.75rem;
+      font-weight: 800;
+      color: var(--brand-red);
+      margin-bottom: 1.25rem;
+    }
+
+    /* =====================================================================
+       SECTION A – NAVBAR
+    ====================================================================== */
+
+    /* Sticky navbar wrapper */
+    #navbar {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background-color: var(--brand-red);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+    }
+
+    /* Inner flex row */
+    .navbar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 1.5rem;
+      height: 68px;
+    }
+
+    /* --- Logo area (top-left) --- */
+    .logo-wrap {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      text-decoration: none;
+    }
+    /* SVG logo badge */
+    .logo-badge {
+      width: 44px;
+      height: 44px;
+      flex-shrink: 0;
+    }
+    .logo-text {
+      font-family: 'Baloo 2', cursive;
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: #fff;
+      line-height: 1;
+    }
+    .logo-text span { color: var(--brand-yellow); }
+
+    /* --- Nav menu links --- */
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Each top-level menu item is a dropdown container */
+    .nav-item { position: relative; }
+
+    .nav-link {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      padding: 0.5rem 0.9rem;
+      color: #fff;
+      font-weight: 700;
+      font-size: 0.92rem;
+      text-decoration: none;
+      border-radius: 6px;
+      transition: background 0.2s;
+      cursor: pointer;
+      user-select: none;
+    }
+    .nav-link:hover,
+    .nav-item:hover .nav-link { background: rgba(255,255,255,0.18); }
+
+    /* Dropdown chevron icon */
+    .nav-link svg { width: 14px; height: 14px; fill: #fff; transition: transform 0.25s; }
+    .nav-item:hover .nav-link svg { transform: rotate(180deg); }
+
+    /* Dropdown panel */
+    .dropdown {
+      display: none;
+      position: absolute;
+      top: calc(100% + 6px);
+      left: 0;
+      min-width: 200px;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+      overflow: hidden;
+      z-index: 200;
+    }
+    .nav-item:hover .dropdown { display: block; }
+
+    .dropdown a {
+      display: block;
+      padding: 0.65rem 1.1rem;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--text-dark);
+      text-decoration: none;
+      transition: background 0.15s;
+    }
+    .dropdown a:hover { background: var(--brand-yellow); color: var(--brand-red); }
+
+    /* --- Search bar (top-right) --- */
+    .search-wrap {
+      display: flex;
+      align-items: center;
+      background: rgba(255,255,255,0.2);
+      border: 2px solid rgba(255,255,255,0.5);
+      border-radius: 999px;
+      padding: 0.25rem 0.6rem 0.25rem 0.9rem;
+      gap: 0.4rem;
+    }
+    .search-wrap input {
+      background: transparent;
+      border: none;
+      outline: none;
+      color: #fff;
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.88rem;
+      width: 160px;
+    }
+    .search-wrap input::placeholder { color: rgba(255,255,255,0.7); }
+    .search-btn {
+      background: #fff;
+      border: none;
+      border-radius: 999px;
+      padding: 0.3rem 0.7rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      color: var(--brand-red);
+      font-weight: 700;
+      font-size: 0.8rem;
+      transition: background 0.2s;
+    }
+    .search-btn:hover { background: var(--brand-yellow); }
+
+    /* =====================================================================
+       SECTION C – LEFT SIDEBAR NAVIGATION PANEL
+    ====================================================================== */
+    /* The sidebar is fixed on the left; main content is offset to the right */
+    #sidebar {
+      position: fixed;
+      top: 68px;          /* sits just below the sticky navbar              */
+      left: 0;
+      width: 210px;
+      height: calc(100vh - 68px);
+      background: #fff8f0;
+      border-right: 3px solid var(--brand-yellow);
+      overflow-y: auto;
+      z-index: 900;
+      padding: 1.2rem 0;
+    }
+
+    .sidebar-title {
+      font-family: 'Baloo 2', cursive;
+      font-size: 0.8rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--brand-red);
+      padding: 0 1.2rem 0.6rem;
+      border-bottom: 2px dashed var(--brand-yellow);
+      margin-bottom: 0.6rem;
+    }
+
+    /* Stacked sidebar links */
+    .sidebar-links { list-style: none; margin: 0; padding: 0; }
+    .sidebar-links li a {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.7rem 1.2rem;
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--text-mid);
+      text-decoration: none;
+      border-left: 4px solid transparent;
+      transition: all 0.2s;
+    }
+    .sidebar-links li a:hover {
+      background: var(--brand-yellow);
+      color: var(--brand-red);
+      border-left-color: var(--brand-red);
+    }
+    .sidebar-links li a .icon { font-size: 1.1rem; }
+
+    /* =====================================================================
+       CONTENT WRAPPER
+       All page content after the navbar sits in this wrapper.
+       On desktop it is offset by the sidebar width.
+    ====================================================================== */
+    #page-content {
+      margin-left: 210px;   /* same as sidebar width                    */
+    }
+
+    /* =====================================================================
+       SECTION B – HERO
+    ====================================================================== */
+    #hero {
+      width: 100%;
+      min-height: 35vh;
+      background: linear-gradient(135deg, var(--brand-yellow) 0%, var(--brand-green) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 3rem 4rem;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Decorative blobs behind the hero text */
+    #hero::before {
+      content: '';
+      position: absolute;
+      width: 360px; height: 360px;
+      background: rgba(255,255,255,0.25);
+      border-radius: 50%;
+      top: -80px; left: -80px;
+      pointer-events: none;
+    }
+    #hero::after {
+      content: '';
+      position: absolute;
+      width: 220px; height: 220px;
+      background: rgba(253,230,138,0.5);
+      border-radius: 50%;
+      bottom: -60px; right: 38%;
+      pointer-events: none;
+    }
+
+    .hero-text { position: relative; z-index: 1; max-width: 480px; }
+    .hero-text h1 {
+      font-family: 'Baloo 2', cursive;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 800;
+      color: var(--brand-red);
+      line-height: 1.1;
+      margin: 0 0 0.75rem;
+    }
+    .hero-text p {
+      font-size: 1.05rem;
+      color: #374151;
+      margin: 0 0 1.5rem;
+      line-height: 1.6;
+    }
+    .cta-btn {
+      display: inline-block;
+      background: var(--cta-orange);
+      color: #fff;
+      font-family: 'Baloo 2', cursive;
+      font-size: 1.1rem;
+      font-weight: 800;
+      padding: 0.75rem 2.2rem;
+      border-radius: 999px;
+      text-decoration: none;
+      box-shadow: 0 6px 18px rgba(249,115,22,0.4);
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+    }
+    .cta-btn:hover {
+      background: var(--cta-orange-dk);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 24px rgba(249,115,22,0.45);
+    }
+
+    /* Hero image placeholder (kids graphic) */
+    .hero-image {
+      position: relative; z-index: 1;
+      flex-shrink: 0;
+      width: clamp(220px, 32%, 380px);
+      animation: float 4s ease-in-out infinite;
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-12px); }
+    }
+
+    /* =====================================================================
+       SECTION D – PRODUCT ROWS
+    ====================================================================== */
+    #products {
+      padding: 3rem 2rem;
+      background: #fffbf5;
+    }
+
+    /* Each category row */
+    .product-row { margin-bottom: 3rem; scroll-margin-top: 80px; }
+    .product-row-title {
+      font-family: 'Baloo 2', cursive;
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--brand-red);
+      margin-bottom: 1rem;
+      padding-left: 0.5rem;
+      border-left: 5px solid var(--cta-orange);
+    }
+
+    /* Horizontal scroll strip of cards */
+    .cards-strip {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 1rem;
+    }
+
+    /* Individual product card */
+    .product-card {
+      background: #fff;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.07);
+      transition: transform 0.25s, box-shadow 0.25s;
+      cursor: pointer;
+    }
+    .product-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 10px 28px rgba(0,0,0,0.13);
+    }
+
+    /* Coloured image placeholder area */
+    .card-img {
+      width: 100%;
+      height: 140px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+    }
+
+    .card-body { padding: 0.75rem 0.9rem 1rem; }
+    .card-name {
+      font-weight: 700;
+      font-size: 0.85rem;
+      color: var(--text-dark);
+      margin-bottom: 0.25rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .card-price {
+      font-family: 'Baloo 2', cursive;
+      font-size: 1rem;
+      font-weight: 800;
+      color: var(--cta-orange);
+    }
+    .card-badge {
+      display: inline-block;
+      font-size: 0.68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 2px 7px;
+      border-radius: 999px;
+      margin-bottom: 0.35rem;
+    }
+
+    /* =====================================================================
+       SECTION E – FOOTER
+    ====================================================================== */
+    #footer {
+      background: var(--footer-bg);
+      border-top: 3px solid var(--brand-yellow);
+      padding: 3rem 3rem 0;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 2.5rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .footer-brand .logo-text { color: var(--brand-red); font-size: 1.3rem; }
+    .footer-brand p {
+      font-size: 0.88rem;
+      color: var(--text-mid);
+      margin: 0.75rem 0 1.25rem;
+      line-height: 1.6;
+    }
+
+    /* Social icons row */
+    .social-links { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+    .social-btn {
+      display: flex; align-items: center; justify-content: center;
+      width: 38px; height: 38px;
+      border-radius: 50%;
+      background: var(--brand-yellow);
+      color: var(--brand-red);
+      font-weight: 800; font-size: 0.85rem;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .social-btn:hover { background: var(--brand-red); color: #fff; transform: scale(1.1); }
+
+    /* Footer column headings */
+    .footer-col h4 {
+      font-family: 'Baloo 2', cursive;
+      font-size: 1rem;
+      font-weight: 800;
+      color: var(--brand-red);
+      margin: 0 0 0.9rem;
+    }
+    .footer-col ul { list-style: none; margin: 0; padding: 0; }
+    .footer-col ul li { margin-bottom: 0.5rem; }
+    .footer-col ul li a {
+      font-size: 0.87rem;
+      color: var(--text-mid);
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.15s;
+    }
+    .footer-col ul li a:hover { color: var(--brand-red); }
+
+    /* Cookie / legal strip */
+    .footer-bottom {
+      border-top: 2px solid var(--brand-yellow);
+      padding: 1.1rem 0;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      font-size: 0.8rem;
+      color: var(--text-mid);
+    }
+    .footer-bottom a {
+      color: var(--brand-red);
+      text-decoration: none;
+      font-weight: 700;
+    }
+    .footer-bottom a:hover { text-decoration: underline; }
+    .legal-links { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+    /* Cookie consent banner */
+    #cookie-banner {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      background: #fff8e1;
+      border-top: 3px solid var(--brand-yellow);
+      padding: 1rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      z-index: 9999;
+      box-shadow: 0 -4px 14px rgba(0,0,0,0.08);
+      flex-wrap: wrap;
+    }
+    #cookie-banner p { margin: 0; font-size: 0.87rem; color: var(--text-mid); }
+    .cookie-btns { display: flex; gap: 0.6rem; flex-shrink: 0; }
+    .cookie-accept {
+      background: var(--brand-red); color: #fff;
+      border: none; border-radius: 999px;
+      padding: 0.45rem 1.2rem; font-family: 'Nunito', sans-serif;
+      font-weight: 700; font-size: 0.85rem; cursor: pointer;
+      transition: background 0.2s;
+    }
+    .cookie-accept:hover { background: var(--brand-red-dk); }
+    .cookie-decline {
+      background: transparent; color: var(--text-mid);
+      border: 2px solid #d1d5db; border-radius: 999px;
+      padding: 0.45rem 1.2rem; font-family: 'Nunito', sans-serif;
+      font-weight: 700; font-size: 0.85rem; cursor: pointer;
+    }
+    .cookie-decline:hover { border-color: var(--brand-red); color: var(--brand-red); }
+
+    /* =====================================================================
+       RESPONSIVE — collapse sidebar at small screens
+    ====================================================================== */
+    @media (max-width: 900px) {
+      #sidebar { display: none; }
+      #page-content { margin-left: 0; }
+      .cards-strip { grid-template-columns: repeat(2, 1fr); }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      #hero { flex-direction: column; padding: 2.5rem 1.5rem; text-align: center; }
+      .hero-image { width: 70%; margin-top: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- =========================================================
+     SECTION A — STICKY NAVBAR (red frame, white lettering)
+     Contains: SVG logo (top-left), nav links with dropdowns,
+     and a search bar (top-right).
+========================================================= -->
+<header id="navbar" role="banner">
+  <div class="navbar-inner">
+
+    <!-- LOGO — top-left, SVG badge + brand name -->
+    <a href="#" class="logo-wrap" aria-label="ChildrenSmart Home">
+      <!-- Inline SVG logo: a star-badge with "CS" initials -->
+      <svg class="logo-badge" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="22" cy="22" r="22" fill="#fde68a"/>
+        <!-- Star shape -->
+        <polygon points="22,6 26.5,17 38,17 28.5,24.5 32,36 22,29 12,36 15.5,24.5 6,17 17.5,17"
+                 fill="#e02020" opacity="0.9"/>
+        <!-- Initials -->
+        <text x="22" y="26" text-anchor="middle" font-family="Baloo 2, cursive"
+              font-size="11" font-weight="800" fill="#fff">CS</text>
+      </svg>
+      <!-- Brand name next to logo -->
+      <span class="logo-text">Children<span>Smart</span></span>
+    </a>
+
+    <!-- NAV LINKS with dropdowns -->
+    <nav role="navigation" aria-label="Main navigation">
+      <ul class="nav-links">
+
+        <!-- Products dropdown -->
+        <li class="nav-item">
+          <span class="nav-link" tabindex="0" aria-haspopup="true" aria-expanded="false">
+            Products
+            <!-- chevron icon -->
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>
+          </span>
+          <div class="dropdown" role="menu">
+            <a href="#row-shoes"    role="menuitem">Children's Shoes</a>
+            <a href="#row-girls-toys"  role="menuitem">Girls' Toys</a>
+            <a href="#row-boys-toys"   role="menuitem">Boys' Toys</a>
+            <a href="#row-uniforms" role="menuitem">School Uniforms</a>
+            <a href="#row-blouses"  role="menuitem">Girls' Blouses</a>
+            <a href="#row-trousers" role="menuitem">Boys' Trousers</a>
+            <a href="#row-skirts"   role="menuitem">Girls' Skirts</a>
+          </div>
+        </li>
+
+        <!-- Services dropdown -->
+        <li class="nav-item">
+          <span class="nav-link" tabindex="0" aria-haspopup="true">
+            Services
+            <svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+          </span>
+          <div class="dropdown" role="menu">
+            <a href="#" role="menuitem">Gift Wrapping</a>
+            <a href="#" role="menuitem">Size Guide</a>
+            <a href="#" role="menuitem">Personalisation</a>
+            <a href="#" role="menuitem">Subscription Box</a>
+          </div>
+        </li>
+
+        <!-- Customer Services dropdown -->
+        <li class="nav-item">
+          <span class="nav-link" tabindex="0" aria-haspopup="true">
+            Customer Services
+            <svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+          </span>
+          <div class="dropdown" role="menu">
+            <a href="#" role="menuitem">Track My Order</a>
+            <a href="#" role="menuitem">Returns &amp; Refunds</a>
+            <a href="#" role="menuitem">FAQs</a>
+            <a href="#" role="menuitem">Live Chat</a>
+          </div>
+        </li>
+
+        <!-- Contact Us dropdown -->
+        <li class="nav-item">
+          <span class="nav-link" tabindex="0" aria-haspopup="true">
+            Contact Us
+            <svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+          </span>
+          <div class="dropdown" role="menu">
+            <a href="#" role="menuitem">Email Us</a>
+            <a href="#" role="menuitem">Call Us</a>
+            <a href="#" role="menuitem">WhatsApp</a>
+            <a href="#" role="menuitem">Store Locator</a>
+          </div>
+        </li>
+
+      </ul><!-- end .nav-links -->
+    </nav>
+
+    <!-- SEARCH BAR — top-right -->
+    <div class="search-wrap" role="search">
+      <input type="text" placeholder="Search products…" aria-label="Search products"/>
+      <button class="search-btn" type="button" aria-label="Submit search">
+        <!-- magnifying-glass icon -->
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+             stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        </svg>
+      </button>
+    </div>
+
+  </div><!-- end .navbar-inner -->
+</header><!-- end #navbar -->
+
+
+<!-- =========================================================
+     SECTION C — LEFT SIDEBAR NAVIGATION PANEL
+     Stacked list of category links; each scrolls to its
+     matching product row in section D.
+     The sidebar is position:fixed so it stays visible while
+     the user scrolls through the product rows.
+========================================================= -->
+<aside id="sidebar" aria-label="Category navigation">
+  <p class="sidebar-title">Shop by Category</p>
+  <ul class="sidebar-links">
+    <li>
+      <a href="#row-shoes" title="Children's Shoes">
+        <span class="icon">👟</span> Children's Shoes
+      </a>
+    </li>
+    <li>
+      <a href="#row-girls-toys" title="Girls' Toys">
+        <span class="icon">🎀</span> Girls' Toys
+      </a>
+    </li>
+    <li>
+      <a href="#row-boys-toys" title="Boys' Toys">
+        <span class="icon">🚗</span> Boys' Toys
+      </a>
+    </li>
+    <li>
+      <a href="#row-uniforms" title="Sample School Uniforms">
+        <span class="icon">🎒</span> School Uniforms
+      </a>
+    </li>
+    <li>
+      <a href="#row-blouses" title="Girls' Blouses">
+        <span class="icon">👗</span> Girls' Blouses
+      </a>
+    </li>
+    <li>
+      <a href="#row-trousers" title="Boys' Trousers">
+        <span class="icon">👖</span> Boys' Trousers
+      </a>
+    </li>
+    <li>
+      <a href="#row-skirts" title="Girls' Skirts">
+        <span class="icon">🩱</span> Girls' Skirts
+      </a>
+    </li>
+  </ul>
+</aside><!-- end #sidebar -->
+
+
+<!-- =========================================================
+     MAIN PAGE CONTENT (offset right by sidebar on desktop)
+========================================================= -->
+<div id="page-content">
+
+  <!-- ======================================================
+       SECTION B — HERO
+       Full-width, ~35vh tall. Pastel yellow/green palette.
+       Features an illustrated kids SVG, headline, subtext,
+       and a Shop Now CTA button.
+  ====================================================== -->
+  <section id="hero" aria-label="Hero banner">
+
+    <!-- Left: headline + CTA -->
+    <div class="hero-text">
+      <h1>Dress Their<br/>Adventure.</h1>
+      <p>Soft, durable clothes made for every little moment.<br/>
+         Designed with love — built to keep up with them.</p>
+      <a href="#products" class="cta-btn">Shop Now</a>
+    </div>
+
+    <!-- Right: SVG illustration of two smiling kids -->
+    <div class="hero-image" aria-hidden="true">
+      <svg viewBox="0 0 340 300" xmlns="http://www.w3.org/2000/svg">
+        <!-- === KID 1 (left — girl in green dress) === -->
+        <!-- Hair -->
+        <ellipse cx="105" cy="62" rx="34" ry="28" fill="#5d3a1a"/>
+        <!-- Pigtail left -->
+        <ellipse cx="75" cy="70" rx="9" ry="16" fill="#5d3a1a" transform="rotate(-20 75 70)"/>
+        <!-- Pigtail right -->
+        <ellipse cx="135" cy="70" rx="9" ry="16" fill="#5d3a1a" transform="rotate(20 135 70)"/>
+        <!-- Head / face -->
+        <circle cx="105" cy="80" r="28" fill="#fcd5b5"/>
+        <!-- Eyes -->
+        <circle cx="97"  cy="76" r="4" fill="#1e293b"/>
+        <circle cx="113" cy="76" r="4" fill="#1e293b"/>
+        <!-- Eye shines -->
+        <circle cx="98.5" cy="74.5" r="1.5" fill="#fff"/>
+        <circle cx="114.5" cy="74.5" r="1.5" fill="#fff"/>
+        <!-- Smile -->
+        <path d="M95 87 Q105 96 115 87" stroke="#e07070" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+        <!-- Cheeks -->
+        <circle cx="92" cy="86" r="5" fill="#f9a8a8" opacity="0.5"/>
+        <circle cx="118" cy="86" r="5" fill="#f9a8a8" opacity="0.5"/>
+        <!-- Body: green dress -->
+        <path d="M80 108 Q75 170 70 230 L140 230 Q135 170 130 108 Z" fill="#86efac"/>
+        <!-- Collar detail -->
+        <circle cx="105" cy="112" r="6" fill="#4ade80"/>
+        <!-- Arms -->
+        <path d="M80 115 Q55 140 60 175" stroke="#fcd5b5" stroke-width="10" stroke-linecap="round" fill="none"/>
+        <path d="M130 115 Q155 140 150 175" stroke="#fcd5b5" stroke-width="10" stroke-linecap="round" fill="none"/>
+        <!-- Hands -->
+        <circle cx="60" cy="177" r="8" fill="#fcd5b5"/>
+        <circle cx="150" cy="177" r="8" fill="#fcd5b5"/>
+        <!-- Legs -->
+        <rect x="88" y="228" width="12" height="55" rx="6" fill="#fcd5b5"/>
+        <rect x="105" y="228" width="12" height="55" rx="6" fill="#fcd5b5"/>
+        <!-- Shoes (girl) -->
+        <ellipse cx="94"  cy="284" rx="14" ry="6" fill="#f43f5e"/>
+        <ellipse cx="111" cy="284" rx="14" ry="6" fill="#f43f5e"/>
+
+        <!-- === KID 2 (right — boy in blue outfit) === -->
+        <!-- Hair -->
+        <rect x="198" y="50" width="68" height="26" rx="13" fill="#2d1b00"/>
+        <!-- Head / face -->
+        <circle cx="232" cy="82" r="28" fill="#ffe0c0"/>
+        <!-- Eyes -->
+        <circle cx="224" cy="78" r="4" fill="#1e293b"/>
+        <circle cx="240" cy="78" r="4" fill="#1e293b"/>
+        <!-- Eye shines -->
+        <circle cx="225.5" cy="76.5" r="1.5" fill="#fff"/>
+        <circle cx="241.5" cy="76.5" r="1.5" fill="#fff"/>
+        <!-- Smile -->
+        <path d="M222 90 Q232 99 242 90" stroke="#e07070" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+        <!-- Cheeks -->
+        <circle cx="219" cy="88" r="5" fill="#f9a8a8" opacity="0.5"/>
+        <circle cx="245" cy="88" r="5" fill="#f9a8a8" opacity="0.5"/>
+        <!-- Body: blue T-shirt -->
+        <rect x="205" y="108" width="54" height="62" rx="10" fill="#93c5fd"/>
+        <!-- Stripes on shirt -->
+        <rect x="205" y="122" width="54" height="6" rx="3" fill="#60a5fa" opacity="0.6"/>
+        <rect x="205" y="136" width="54" height="6" rx="3" fill="#60a5fa" opacity="0.6"/>
+        <!-- Arms -->
+        <path d="M207 118 Q183 142 186 172" stroke="#ffe0c0" stroke-width="10" stroke-linecap="round" fill="none"/>
+        <path d="M257 118 Q280 142 278 172" stroke="#ffe0c0" stroke-width="10" stroke-linecap="round" fill="none"/>
+        <!-- Hands -->
+        <circle cx="186" cy="174" r="8" fill="#ffe0c0"/>
+        <circle cx="278" cy="174" r="8" fill="#ffe0c0"/>
+        <!-- Trousers -->
+        <rect x="205" y="168" width="54" height="60" rx="8" fill="#475569"/>
+        <!-- Belt -->
+        <rect x="205" y="166" width="54" height="8" rx="4" fill="#1e293b"/>
+        <rect x="226" y="164" width="12" height="12" rx="2" fill="#fde68a"/>
+        <!-- Legs -->
+        <rect x="207" y="225" width="18" height="55" rx="7" fill="#475569"/>
+        <rect x="233" y="225" width="18" height="55" rx="7" fill="#475569"/>
+        <!-- Shoes (boy) -->
+        <ellipse cx="216" cy="282" rx="15" ry="6" fill="#1e293b"/>
+        <ellipse cx="242" cy="282" rx="15" ry="6" fill="#1e293b"/>
+
+        <!-- Stars / sparkles in background for playfulness -->
+        <text x="10"  y="40"  font-size="18">✨</text>
+        <text x="310" y="55"  font-size="14">⭐</text>
+        <text x="160" y="30"  font-size="12">🌟</text>
+        <text x="20"  y="220" font-size="16">🌈</text>
+        <text x="295" y="210" font-size="16">🎈</text>
+      </svg>
+    </div><!-- end .hero-image -->
+
+  </section><!-- end #hero -->
+
+
+  <!-- ======================================================
+       SECTION D — PRODUCT ROWS
+       Seven category rows, each with 5 product cards.
+       Each row has an id matching the sidebar & navbar links.
+  ====================================================== -->
+  <section id="products" aria-label="Product catalogue">
+
+    <!-- ── ROW 1: CHILDREN'S SHOES ── -->
+    <div class="product-row" id="row-shoes">
+      <h2 class="product-row-title">👟 Children's Shoes</h2>
+      <div class="cards-strip">
+
+        <!-- Card 1 -->
+        <article class="product-card" aria-label="Male Sandals">
+          <div class="card-img" style="background:#bfdbfe;">👦🩴</div>
+          <div class="card-body">
+            <span class="card-badge" style="background:#bfdbfe;color:#1d4ed8;">Boys</span>
+            <p class="card-name">Boys' Velcro Sandals</p>
+            <p class="card-price">₦4,500</p>
+          </div>
+        </article>
+
+        <!-- Card 2 -->
+        <article class="product-card" aria-label="Female Sandals">
+          <div class="card-img" style="background:#fbcfe8;">👧🩴</div>
+          <div class="card-body">
+            <span class="card-badge" style="background:#fbcfe8;color:#be185d;">Girls</span>
+            <p class="card-name">Girls' Glitter Sandals</p>
+            <p class="card-price">₦5,200</p>
+          </div>
+        </article>
+
+        <!-- Card 3 -->
+        <article class="product-card" aria-label="Laced Shoes">
+          <div class="card-img" style="background:#d1fae5;">👟</div>
+          <div class="card-body">
+            <span class="card-badge" style="background:#d1fae5;color:#065f46;">Unisex</span>
+            <p class="card-name">Classic Laced Sneakers</p>
+            <p class="card-price">₦6,800</p>
+          </div>
+        </article>
+
+        <!-- Card 4 -->
+        <article class="product-card" aria-label="Non-laced Shoes">
+          <div class="card-img" style="background:#fde68a;">🥿</div>
+          <div class="card-body">
+            <span class="card-badge" style="background:#fde68a;color:#92400e;">Unisex</span>
+            <p class="card-name">Slip-On Loafers</p>
+            <p class="card-price">₦5,900</p>
+          </div>
+        </article>
+
+        <!-- Card 5 -->
+        <article class="product-card" aria-label="Rain Boots">
+          <div class="card-img" style="background:#e9d5ff;">🌧️👢</div>
+          <div class="card-body">
+            <span class="card-badge" style="background:#e9d5ff;color:#7c3aed;">Unisex</span>
+            <p class="card-name">Rainbow Rain Boots</p>
+            <p class="card-price">₦7,500</p>
+          </div>
+        </article>
+
+      </div><!-- end .cards-strip -->
+    </div><!-- end #row-shoes -->
+
+
+    <!-- ── ROW 2: GIRLS' TOYS ── -->
+    <div class="product-row" id="row-girls-toys">
+      <h2 class="product-row-title">🎀 Girls' Toys</h2>
+      <div class="cards-strip">
+
+        <article class="product-card">
+          <div class="card-img" style="background:#fbcfe8;">🪆</div>
+          <div class="card-body">
+            <span class="card-badge" style="background:#fbcfe8;color:#be185d;">Toy</span>
+            <p class="card-name">Pretty Nesting Dolls</p>
+            <p class="card-price">₦3,200</p>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <div class="card-img" style="background:#fde68a;">🧸</div>
+          <div class="card-body">
+            <span class="card-badge" style="background:#fde68a;color:#92400e;">Plush</span>
+            <p class="card-name">Teddy Bear Huggable</p>
+            <p class="card-price">₦4,000</p>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <div class="card-img" style="background:#d1fae5;">🎨</div>
+          <div class="card-body">
+            <span class="card-badge" style="background:#d1fae5;color:#065f46;">Creative</span>
+            <p class="card-name">Art & Craft Kit</p>
+            <p class="card-price">₦5,500</p>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <div class="card-img" style="background:#e9d5ff;">👑</div>
+          <div class="card-body">
+            <span class="card-badge" style="background:#e9d5ff;color:#7c3aed;">Dress-Up</span>
+            <p class="card-name">Princess Crown Set</p>
+            <p class="card-price">₦2,800</p>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <div class="card-img" style="background:#bfdbfe;">🧩</div>
+          <div class="card-body">
+            <span class="card-badge" style="background:#bfdbfe;color:#1d4ed8;">Puzzle</span>
+            <p class="card-name">Fairy-Tale Puzzle 48pc</p>
+            <p class="card-price">₦3,600</p>
+          </div>
+        </article>
+
+      </div>
+    </div><!-- end #row-girls-toys -->
+
+
+    <!-- ── ROW 3: BOYS' TOYS ── -->
+    <div class="product-row" id="row-boys-toys">
+      <h2 class="product-row-title">🚗 Boys' Toys</h2>
+      <div class="cards-strip">
+
+        <article class="product-card">
+          <div class="card-img" style="background:#bfdbfe;">🚗</div>
+          <div class="card-body">
+            <span class="card-badge" style="background:#bfdbfe;color:#1d4ed8;">Vehicles</span>
+            <p class="card-name">Die-Cast Racing Car</p>
+            <p class="card-price">₦3,500</p>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <div class="card-img" style="background:#d1fae5;">🤖</div>
+          <div class="card-body">
+            <span class="card-badge" style="background:#d1fae5;color:#065f46;">Action</span>
+            <p class="card-name">Transformer Robot</p>
+            <p class="card-price">₦6,200</p>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <div class="card-img" style="background:#fde68a;">🧱</div>
+          <div class="card-body">
+            <span class="card-badge" style="background:#fde68a;color:#92400e;">Building</span>
+            <p class="card-name">Block Builder Set 100pc</p>
+            <p class="card-price">₦5,000</p>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <div class="card-img" style="background:#fbcfe8;">⚽</div>
+          <div class="card-body">
+            <span class="card-badge" style="background:#fbcfe8;color:#be185d;">Sports</span>
+            <p class="card-name">Mini Football Set</p>
+            <p class="card-price">₦4,300</p>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <div class="card-img" style="background:#e9d5ff;">🚀</div>
+          <div class="card-body">
+            <span class="card-badge" style="background:#e9d5ff;color:#7c3aed;">Space</span>
+            <p class="card-name">Space Explorer Kit</p>
+            <p class="card-price">₦7,000</p>
+          </div>
+        </article>
+
+      </div>
+    </div><!-- end #row-boys-toys -->
+
+
+    <!-- ── ROW 4: SAMPLE SCHOOL UNIFORMS ── -->
+    <div class="product-row" id="row-uniforms">
+      <h2 class="product-row-title">🎒 Sample School Uniforms</h2>
+      <div class="cards-strip">
+
+        <article class="product-card">
+          <div class="card-img" style="background:#bfdbfe;">👕</div>
+          <div class="card-body">
+            <span class="card-badge" style="background:#bfdbfe;color:#1d4ed8;">Boys</span>
+            <p class="card-name">White School Shirt</p>
+            <p class="card-price">₦2,500</p>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <div class="card-img" style="background:#d1fae5;">👗</div>
+          <div class="card-body">
+            <span class="card-badge" style="background:#d1fae5;color:#065f46;">Girls</span>
+            <p class="card-name">Checked Pinafore Dress</p>
+            <p class="card-price">₦3,800</p>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <div class="card-img" style="background:#fde68a;">🧥</div>
+          <div class="card-body">
+            <span class="card-badge" style="background:#fde68a;color:#92400e;">Unisex</span>
+            <p class="card-name">School Blazer</p>
+            <p class="card-price">₦8,500</p>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <div class="card-img" style="background:#fbcfe8;">🎽</div>
+          <div class="card-body">
+            <span class="card-badge" style="background:#fbcfe8;color:#be185d;">PE Kit</span>
+            <p class="card-name">Sports Day PE Set</p>
+            <p class="card-price">₦4,200</p>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <div class="card-img" style="background:#e9d5ff;">🎗️</div>
+          <div class="card-body">
+            <span class="card-badge" style="background:#e9d5ff;color:#7c3aed;">Accessories</span>
+            <p class="card-name">School Tie & Belt Pack</p>
+            <p class="card-price">₦1,800</p>
+          </div>
+        </article>
+
+      </div>
+    </div><!-- end #row-uniforms -->
+
+
+    <!-- ── ROW 5: GIRLS' BLOUSES ── -->
+    <div class="product-row" id="row-blouses">
+      <h2 class="product-row-title">👗 Girls' Blouses</h2>
+      <div class="cards-strip">
+
+        <article class="product-card">
+          <div class="card-img" style="background:#fbcfe8;">🌸</div>
+          <div class="card-body">
+            <span class="card-badge" style="background:#fbcfe8;color:#be185d;">Casual</span>
+            <p class="card-name">Floral Puff-Sleeve Top</p>
+            <p class="card-price">₦3,200</p>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <div class="card-img" style="background:#d1fae5;">🦋</div>
+          <div class="card-body">
+            <span class="card-badge" style="background:#d1fae5;color:#065f46;">Party</span>
+            <p class="card-name">Butterfly Embroidery Blouse</p>
+            <p class="card-price">₦4,600</p>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <div class="card-img" style="background:#fde68a;">⭐</div>
+          <div class="card-body">
+            <span class="card-badge" style="background:#fde68a;color:#92400e;">Everyday</span>
+            <p class="card-name">Star Print Cropped Top</p>
+            <p class="card-price">₦2,900</p>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <div class="card-img" style="background:#bfdbfe;">🌈</div>
+          <div class="card-body">
+            <span class="card-badge" style="background:#bfdbfe;color:#1d4ed8;">Fun</span>
+            <p class="card-name">Rainbow Stripe Shirt</p>
+            <p class="card-price">₦3,500</p>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <div class="card-img" style="background:#e9d5ff;">🌺</div>
+          <div class="card-body">
+            <span class="card-badge" style="background:#e9d5ff;color:#7c3aed;">Smart</span>
+            <p class="card-name">Lace-Collar Blouse</p>
+            <p class="card-price">₦4,100</p>
+          </div>
+        </article>
+
+      </div>
+    </div><!-- end #row-blouses -->
+
+
+    <!-- ── ROW 6: BOYS' TROUSERS ── -->
+    <div class="product-row" id="row-trousers">
+      <h2 class="product-row-title">👖 Boys' Trousers</h2>
+      <div class="cards-strip">
+
+        <article class="product-card">
+          <div class="card-img" style="background:#bfdbfe;">👖</div>
+          <div class="card-body">
+            <span class="card-badge" style="background:#bfdbfe;color:#1d4ed8;">Casual</span>
+            <p class="card-name">Slim-Fit Chino Pants</p>
+            <p class="card-price">₦4,000</p>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <div class="card-img" style="background:#d1fae5;">🏕️</div>
+          <div class="card-body">
+            <span class="card-badge" style="background:#d1fae5;color:#065f46;">Outdoor</span>
+            <p class="card-name">Cargo Adventure Pants</p>
+            <p class="card-price">₦5,300</p>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <div class="card-img" style="background:#fde68a;">🤵</div>
+          <div class="card-body">
+            <span class="card-badge" style="background:#fde68a;color:#92400e;">Smart</span>
+            <p class="card-name">Navy Formal Trousers</p>
+            <p class="card-price">₦5,800</p>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <div class="card-img" style="background:#fbcfe8;">🩲</div>
+          <div class="card-body">
+            <span class="card-badge" style="background:#fbcfe8;color:#be185d;">Shorts</span>
+            <p class="card-name">Elastic-Waist Shorts</p>
+            <p class="card-price">₦2,500</p>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <div class="card-img" style="background:#e9d5ff;">🌀</div>
+          <div class="card-body">
+            <span class="card-badge" style="background:#e9d5ff;color:#7c3aed;">Denim</span>
+            <p class="card-name">Stretch Denim Jeans</p>
+            <p class="card-price">₦6,200</p>
+          </div>
+        </article>
+
+      </div>
+    </div><!-- end #row-trousers -->
+
+
+    <!-- ── ROW 7: GIRLS' SKIRTS ── -->
+    <div class="product-row" id="row-skirts">
+      <h2 class="product-row-title">🩱 Girls' Skirts</h2>
+      <div class="cards-strip">
+
+        <article class="product-card">
+          <div class="card-img" style="background:#fbcfe8;">🌷</div>
+          <div class="card-body">
+            <span class="card-badge" style="background:#fbcfe8;color:#be185d;">Flouncy</span>
+            <p class="card-name">Tutu Layered Skirt</p>
+            <p class="card-price">₦3,800</p>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <div class="card-img" style="background:#d1fae5;">🎠</div>
+          <div class="card-body">
+            <span class="card-badge" style="background:#d1fae5;color:#065f46;">A-line</span>
+            <p class="card-name">Pleated A-Line Skirt</p>
+            <p class="card-price">₦3,200</p>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <div class="card-img" style="background:#fde68a;">☀️</div>
+          <div class="card-body">
+            <span class="card-badge" style="background:#fde68a;color:#92400e;">Sunny</span>
+            <p class="card-name">Denim Mini Skirt</p>
+            <p class="card-price">₦4,500</p>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <div class="card-img" style="background:#bfdbfe;">🎀</div>
+          <div class="card-body">
+            <span class="card-badge" style="background:#bfdbfe;color:#1d4ed8;">Formal</span>
+            <p class="card-name">Bow-Detail Skirt</p>
+            <p class="card-price">₦4,900</p>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <div class="card-img" style="background:#e9d5ff;">🌙</div>
+          <div class="card-body">
+            <span class="card-badge" style="background:#e9d5ff;color:#7c3aed;">Boho</span>
+            <p class="card-name">Printed Midi Skirt</p>
+            <p class="card-price">₦5,100</p>
+          </div>
+        </article>
+
+      </div>
+    </div><!-- end #row-skirts -->
+
+  </section><!-- end #products -->
+
+
+  <!-- ======================================================
+       SECTION E — FOOTER
+       Light warm cream background (#fef9ee).
+       Columns: Brand | Shop | Help | Connect
+       Bottom bar: copyright, cookie policy, legal links.
+       Cookie consent banner (fixed bottom overlay).
+  ====================================================== -->
+  <footer id="footer" role="contentinfo">
+
+    <!-- Four-column footer grid -->
+    <div class="footer-grid">
+
+      <!-- Column 1: Brand blurb + social media icons -->
+      <div class="footer-brand">
+        <!-- Mini logo repeat -->
+        <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.5rem;">
+          <svg width="36" height="36" viewBox="0 0 44 44" fill="none" aria-hidden="true">
+            <circle cx="22" cy="22" r="22" fill="#fde68a"/>
+            <polygon points="22,6 26.5,17 38,17 28.5,24.5 32,36 22,29 12,36 15.5,24.5 6,17 17.5,17"
+                     fill="#e02020" opacity="0.9"/>
+            <text x="22" y="26" text-anchor="middle" font-family="Baloo 2, cursive"
+                  font-size="11" font-weight="800" fill="#fff">CS</text>
+          </svg>
+          <span class="logo-text" style="color:var(--brand-red);font-size:1.25rem;">
+            Children<span style="color:var(--cta-orange);">Smart</span>
+          </span>
+        </div>
+        <p>
+          We design soft, playful clothing and toys that let every child
+          explore, imagine, and grow — made with love, built to last.
+        </p>
+
+        <!-- Social media icon links -->
+        <div class="social-links" role="list" aria-label="Social media links">
+          <!-- Each button is labelled for screen readers -->
+          <a href="#" class="social-btn" aria-label="Follow us on Facebook"  role="listitem">f</a>
+          <a href="#" class="social-btn" aria-label="Follow us on Instagram" role="listitem">📷</a>
+          <a href="#" class="social-btn" aria-label="Follow us on Twitter/X"  role="listitem">𝕏</a>
+          <a href="#" class="social-btn" aria-label="Watch us on YouTube"     role="listitem">▶</a>
+          <a href="#" class="social-btn" aria-label="Follow us on TikTok"     role="listitem">♪</a>
+          <a href="#" class="social-btn" aria-label="Join us on WhatsApp"     role="listitem">💬</a>
+        </div>
+      </div><!-- end .footer-brand -->
+
+      <!-- Column 2: Quick shop links -->
+      <div class="footer-col">
+        <h4>Shop</h4>
+        <ul>
+          <li><a href="#row-shoes">Children's Shoes</a></li>
+          <li><a href="#row-girls-toys">Girls' Toys</a></li>
+          <li><a href="#row-boys-toys">Boys' Toys</a></li>
+          <li><a href="#row-uniforms">School Uniforms</a></li>
+          <li><a href="#row-blouses">Girls' Blouses</a></li>
+          <li><a href="#row-trousers">Boys' Trousers</a></li>
+          <li><a href="#row-skirts">Girls' Skirts</a></li>
+        </ul>
+      </div>
+
+      <!-- Column 3: Help & support links -->
+      <div class="footer-col">
+        <h4>Help</h4>
+        <ul>
+          <li><a href="#">FAQs</a></li>
+          <li><a href="#">Shipping Policy</a></li>
+          <li><a href="#">Returns &amp; Exchanges</a></li>
+          <li><a href="#">Track My Order</a></li>
+          <li><a href="#">Size Guide</a></li>
+          <li><a href="#">Gift Cards</a></li>
+          <li><a href="#">Contact Us</a></li>
+        </ul>
+      </div>
+
+      <!-- Column 4: Newsletter sign-up -->
+      <div class="footer-col">
+        <h4>Stay in the Loop</h4>
+        <p style="font-size:0.85rem;color:var(--text-mid);margin:0 0 0.75rem;line-height:1.5;">
+          Get new arrivals, exclusive deals, and parenting tips delivered to your inbox.
+        </p>
+        <!-- Email input (no <form> tag; handled by JS) -->
+        <div style="display:flex;flex-direction:column;gap:0.5rem;">
+          <input id="nl-email" type="email" placeholder="your@email.com"
+                 aria-label="Email address for newsletter"
+                 style="border:2px solid var(--brand-yellow);border-radius:8px;
+                        padding:0.55rem 0.8rem;font-family:'Nunito',sans-serif;
+                        font-size:0.87rem;outline:none;"/>
+          <button onclick="subscribeNewsletter()"
+                  style="background:var(--brand-red);color:#fff;border:none;
+                         border-radius:8px;padding:0.55rem;font-family:'Nunito',sans-serif;
+                         font-weight:700;font-size:0.87rem;cursor:pointer;
+                         transition:background 0.2s;"
+                  onmouseover="this.style.background='var(--brand-red-dk)'"
+                  onmouseout="this.style.background='var(--brand-red)'">
+            Subscribe ✉️
+          </button>
+          <p id="nl-msg" style="font-size:0.8rem;color:var(--cta-orange);margin:0;display:none;">
+            🎉 Thanks! You're subscribed.
+          </p>
+        </div>
+      </div>
+
+    </div><!-- end .footer-grid -->
+
+    <!-- ── Footer bottom bar: copyright + legal links ── -->
+    <div class="footer-bottom">
+      <!-- Copyright notice -->
+      <p>© <span id="year"></span> ChildrenSmart Ltd. All rights reserved.</p>
+
+      <!-- Legal / policy links -->
+      <div class="legal-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Cookie Policy</a>
+        <a href="#">Terms of Use</a>
+        <a href="#">Accessibility</a>
+        <a href="#">Sitemap</a>
+      </div>
+    </div><!-- end .footer-bottom -->
+
+  </footer><!-- end #footer -->
+
+</div><!-- end #page-content -->
+
+
+<!-- =========================================================
+     COOKIE CONSENT BANNER
+     Appears at the bottom of the screen on first visit.
+     "Accept" stores a flag in sessionStorage; "Decline" hides it.
+     (sessionStorage is cleared when the tab closes — for demo
+      purposes. In production, use localStorage or a real cookie.)
+========================================================= -->
+<div id="cookie-banner" role="dialog" aria-live="polite"
+     aria-label="Cookie consent" aria-modal="false">
+  <p>
+    🍪 We use cookies to improve your experience, personalise ads, and
+    analyse traffic. Read our <a href="#" style="color:var(--brand-red);font-weight:700;">Cookie Policy</a>.
+  </p>
+  <div class="cookie-btns">
+    <button class="cookie-accept" onclick="acceptCookies()">Accept All</button>
+    <button class="cookie-decline" onclick="declineCookies()">Decline</button>
+  </div>
+</div>
+
+
+<!-- =========================================================
+     JAVASCRIPT — minimal, well-commented utilities
+========================================================= -->
+<script>
+  /* ── 1. Set current year in the footer copyright line ── */
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  /* ── 2. Cookie banner: show/hide logic ──
+         We check sessionStorage so the banner doesn't re-appear
+         if the user has already responded during this tab session. */
+  const banner = document.getElementById('cookie-banner');
+
+  // Hide banner immediately if user already responded
+  if (sessionStorage.getItem('cookieChoice')) {
+    banner.style.display = 'none';
+  }
+
+  function acceptCookies() {
+    sessionStorage.setItem('cookieChoice', 'accepted');
+    banner.style.display = 'none';
+    console.log('Cookies accepted — initialise analytics here');
+  }
+
+  function declineCookies() {
+    sessionStorage.setItem('cookieChoice', 'declined');
+    banner.style.display = 'none';
+    console.log('Cookies declined');
+  }
+
+  /* ── 3. Newsletter subscription (demo) ──
+         Replace the console.log with a real API call in production. */
+  function subscribeNewsletter() {
+    const email = document.getElementById('nl-email').value.trim();
+    const msg   = document.getElementById('nl-msg');
+    if (!email || !email.includes('@')) {
+      alert('Please enter a valid email address.');
+      return;
+    }
+    console.log('Newsletter signup:', email); // TODO: send to backend
+    document.getElementById('nl-email').value = '';
+    msg.style.display = 'block';
+    setTimeout(() => { msg.style.display = 'none'; }, 4000);
+  }
+
+  /* ── 4. Add-to-cart micro-interaction ──
+         Each product card gets a click handler that briefly
+         shakes the card to give the user visual feedback. */
+  document.querySelectorAll('.product-card').forEach(card => {
+    card.addEventListener('click', () => {
+      card.style.transition = 'transform 0.1s';
+      card.style.transform  = 'scale(0.96)';
+      setTimeout(() => { card.style.transform = ''; }, 150);
+      // TODO: wire up real cart logic here
+    });
+  });
+</script>
+
+</body>
+</html>

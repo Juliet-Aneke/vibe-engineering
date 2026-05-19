@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChildrenSmart - Dress Their Adventure</title>
+    <!-- Linking external CSS stylesheet -->
+    <link rel="stylesheet" href="style.css">
+    <!-- FontAwesome for Social Media Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="./css/gemini.css">
+</head>
+<body>
+
+    <!-- SECTION A: STICKY MENU BAR & HEADER -->
+    <header class="main-header">
+        <div class="header-container">
+            <!-- Text-based Logo (Top Left) -->
+            <div class="logo">
+                <a href="#">Children<span>Smart</span></a>
+            </div>
+
+            <!-- Navigation Menu with Dropdowns -->
+            <nav class="navbar">
+                <ul class="nav-links">
+                    <li class="dropdown">
+                        <a href="#" class="dropbtn">Products <i class="fas fa-caret-down"></i></a>
+                        <div class="dropdown-content">
+                            <a href="#shoes">Shoes</a>
+                            <a href="#girls-toys">Girls' Toys</a>
+                            <a href="#boys-toys">Boys' Toys</a>
+                            <a href="#uniforms">Uniforms</a>
+                        </div>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropbtn">Services <i class="fas fa-caret-down"></i></a>
+                        <div class="dropdown-content">
+                            <a href="#">Gift Wrapping</a>
+                            <a href="#">Size Consultations</a>
+                            <a href="#">Custom Tailoring</a>
+                        </div>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropbtn">Customer Services <i class="fas fa-caret-down"></i></a>
+                        <div class="dropdown-content">
+                            <a href="#">Track Order</a>
+                            <a href="#">Returns & Exchanges</a>
+                            <a href="#">FAQs</a>
+                        </div>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropbtn">Contact Us <i class="fas fa-caret-down"></i></a>
+                        <div class="dropdown-content">
+                            <a href="#">Email Support</a>
+                            <a href="#">Live Chat</a>
+                            <a href="#">Store Locator</a>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+
+            <!-- Search Bar (Top Right) -->
+            <div class="search-bar">
+                <form action="#">
+                    <input type="text" placeholder="Search clothes, toys...">
+                    <button type="submit"><i class="fas fa-search"></i></button>
+                </form>
+            </div>
+        </div>
+    </header>
+
+    <!-- SECTION B: HERO SECTION -->
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1>Dress Their Adventure.</h1>
+            <p>Soft, durable clothes made for every little moment.</p>
+            <a href="#shoes" class="cta-btn">Shop Now</a>
+        </div>
+        <!-- Hero image showcasing two smiling kids -->
+        <div class="hero-image">
+            <img src="https://images.unsplash.com/photo-1503919545889-aef636e10ad4?auto=format&fit=crop&w=800&q=80" alt="Smiling kids in casual outfits">
+        </div>
+    </section>
+
+    <!-- MAIN BODY WRAPPER (For Sidebar + Product Layout) -->
+    <div class="main-layout">
+        
+        <!-- SECTION C: LEFT NAVIGATION PANEL (STACKED LINKS) -->
+        <aside class="sidebar">
+            <h3>Quick Navigation</h3>
+            <ul class="sidebar-links">
+                <li><a href="#shoes"><i class="fas fa-shoe-prints"></i> Children's Shoes</a></li>
+                <li><a href="#girls-toys"><i class="fas fa-doll-playing"></i> Girls' Toys</a></li>
+                <li><a href="#boys-toys"><i class="fas fa-robot"></i> Boys' Toys</a></li>
+                <li><a href="#uniforms"><i class="fas fa-user-graduate"></i> School Uniforms</a></li>
+                <li><a href="#girls-blouses"><i class="fas fa-tshirt"></i> Girls' Blouses</a></li>
+                <li><a href="#boys-trousers"><i class="fas fa-columns"></i> Boys' Trousers</a></li>
+                <li><a href="#girls-skirts"><i class="fas fa-female"></i> Girls' Skirts</a></li>
+            </ul>
+        </aside>
+
+        <!-- SECTION D: PRODUCT SECTION (7 Rows x 5 Cards) -->
+        <main class="product-section">
+            
+            <!-- Row 1: Children's Shoes -->
+            <section id="shoes" class="product-row-wrapper">
+                <h2>Children's Shoes</h2>
+                <div class="product-grid">
+                    <!-- Card 1 -->
+                    <div class="product-card">
+                        <img src="https://images.unsplash.com/photo-1514989940723-e8e5163ccbe8?auto=format&fit=crop&w=300&q=80" alt="Male Sandals">
+                        <h4>Boys' Casual Sandals</h4>
+                        <p class="price">$24.99</p>
+                    </div>
+                    <!-- Card 2 -->
+                    <div class="product-card">
+                        <img src="https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?auto=format&fit=crop&w=300&q=80" alt="Female Sandals">
+                        <h4>Girls' Pastel Sandals</h4>
+                        <p class="price">$22.99</p>
+                    </div>
+                    <!-- Card 3 -->
+                    <div class="product-card">
+                        <img src="https://images.unsplash.com/photo-1539185441755-769473a23570?auto=format&fit=crop&w=300&q=80" alt="Laced Shoes">
+                        <h4>Classic Laced Sneakers</h4>
+                        <p class="price">$35.00</p>
+                    </div>
+                    <!-- Card 4 -->
+                    <div class="product-card">
+                        <img src="https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?auto=format&fit=crop&w=300&q=80" alt="Non-laced Shoes">
+                        <h4>Slip-On Running Shoes</h4>
+                        <p class="price">$29.99</p>
+                    </div>
+                    <!-- Card 5 -->
+                    <div class="product-card">
+                        <img src="https://images.unsplash.com/photo-1608231387042-66d1773070a5?auto=format&fit=crop&w=300&q=80" alt="Infant Booties">
+                        <h4>Cozy Infant Booties</h4>
+                        <p class="price">$19.99</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Row 2: Girls' Toys -->
+            <section id="girls-toys" class="product-row-wrapper">
+                <h2>Girls' Toys</h2>
+                <div class="product-grid">
+                    <div class="product-card">
+                        <img src="https://images.unsplash.com/photo-1559251606-c623743a6d76?auto=format&fit=crop&w=300&q=80" alt="Doll House">
+                        <h4>Wooden Doll House</h4>
+                        <p class="price">$49.99</p>
+                    </div>
+                    <div class="product-card">
+                        <img src="https://images.unsplash.com/photo-1515488042361-404e9250afef?auto=format&fit=crop&w=300&q=80" alt="Plush Toy">
+                        <h4>Unicorn Plushie</h4>
+                        <p class="price">$15.99</p>
+                    </div>
+                    <div class="product-card">
+                        <img src="https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?auto=format&fit=crop&w=300&q=80" alt="Art Set">
+                        <h4>Creative Painting Kit</h4>
+                        <p class="price">$19.99</p>
+                    </div>
+                    <div class="product-card">
+                        <img src="https://images.unsplash.com/photo-1587654780291-39c9404d746b?auto=format&fit=crop&w=300&q=80" alt="Building Blocks">
+                        <h4>Pastel Building Blocks</h4>
+                        <p class="price">$25.00</p>
+                    </div>
+                    <div class="product-card">
+                        <img src="https://images.unsplash.com/photo-1537655780520-1e392edd816a?auto=format&fit=crop&w=300&q=80" alt="Tea Set">
+                        <h4>Miniature Tea Party Set</h4>
+                        <p class="price">$18.50</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Row 3: Boys' Toys -->
+            <section id="boys-toys" class="product-row-wrapper">
+                <h2>Boys' Toys</h2>
+                <div class="product-grid">
+                    <div class="product-card">
+                        <img src="https://images.unsplash.com/photo-1532330393533-443990a51d10?auto=format&fit=crop&w=300&q=80" alt="Toy Car">
+                        <h4>Race Car Transporter</h4>
+                        <p class="price">$29.99</p>
+                    </div>
+                    <div class="product-card">
+                        <img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=300&q=80" alt="Robot">
+                        <h4>Interactive Mini Robot</h4>
+                        <p class="price">$39.99</p>
+                    </div>
+                    <div class="product-card">
+                        <img src="https://images.unsplash.com/photo-1561525140-c2a4cc68e4db?auto=format&fit=crop&w=300&q=80" alt="Train Set">
+                        <h4>Classic Wooden Train Track</h4>
+                        <p class="price">$34.99</p>
+                    </div>
+                    <div class="product-card">
+                        <img src="https://images.unsplash.com/photo-1581092921461-eab62e97a780?auto=format&fit=crop&w=300&q=80" alt="Science Kit">
+                        <h4>Junior Chemistry Lab</h4>
+                        <p class="price">$27.00</p>
+                    </div>
+                    <div class="product-card">
+                        <img src="https://images.unsplash.com/photo-1623939012339-5df0f81d7742?auto=format&fit=crop&w=300&q=80" alt="Action Figure">
+                        <h4>Space Ranger Action Figure</h4>
+                        <p class="price">$14.99</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Row 4: Sample School Uniforms -->
+            <section id="uniforms" class="product-row-wrapper">
+                <h2>Sample School Uniforms</h2>
+                <div class="product-grid">
+                    <div class="product-card">
+                        <img src="https://images.unsplash.com/photo-1508830524289-0adcbe822b40?auto=format&fit=crop&w=300&q=80" alt="Boys Uniform">
+                        <h4>Classic Boys' School Blazer</h4>
+                        <p class="price">$45.00</p>
+                    </div>
+                    <div class="product-card">
+                        <img src="https://images.unsplash.com/photo-1546410531-bb4caa6b424d?auto=format&fit=crop&w=300&q=80" alt="Girls Uniform">
+                        <h4>Plaid School Pinafore</h4>
+                        <p class="price">$38.99</p>
+                    </div>
+                    <div class="product-card">
+                        <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=300&q=80" alt="Polo Shirt">
+                        <h4>Unisex Cotton Polo (3-Pack)</h4>
+                        <p class="price">$21.99</p>
+                    </div>
+                    <div class="product-card">
+                        <img src="https://images.unsplash.com/photo-1516627145497-ae6968895b74?auto=format&fit=crop&w=300&q=80" alt="V-Neck Sweater">
+                        <h4>Unisex V-Neck Uniform Sweater</h4>
+                        <p class="price">$28.50</p>
+                    </div>
+                    <div class="product-card">
+                        <img src="https://images.unsplash.com/photo-1503919545889-aef636e10ad4?auto=format&fit=crop&w=300&q=80" alt="Uniform Shorts">
+                        <h4>Boys' Pleated Uniform Shorts</h4>
+                        <p class="price">$18.99</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Row 5: Girls' Blouses -->
+            <section id="girls-blouses" class="product-row-wrapper">
+                <h2>Girls' Blouses</h2>
+                <div class="product-grid">
+                    <div class="product-card">
+                        <img src="https://images.unsplash.com/photo-1611106211090-8f3c79ee8542?auto=format&fit=crop&w=300&q=80" alt="Floral Blouse">
+                        <h4>Floral Ruffle Blouse</h4>
+                        <p class="price">$18.99</p>
+                    </div>
+                    <div class="product-card">
+                        <img src="https://images.unsplash.com/photo-1519238263530-99bdd11df2ea?auto=format&fit=crop&w=300&q=80" alt="Lace Blouse">
+                        <h4>White Lace Party Blouse</h4>
+                        <p class="price">$22.00</p>
+                    </div>
+                    <div class="product-card">
+                        <img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&w=300&q=80" alt="Cotton Top">
+                        <h4>Casual Short-Sleeve Linen Blouse</h4>
+                        <p class="price">$16.50</p>
+                    </div>
+                    <div class="product-card">
+                        <img src="https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?auto=format&fit=crop&w=300&q=80" alt="Polka Dot">
+                        <h4>Polka Dot Cotton Top</h4>
+                        <p class="price">$17.99</p>
+                    </div>
+                    <div class="product-card">
+                        <img src="https://images.unsplash.com/photo-1603252109303-2751441dd157?auto=format&fit=crop&w=300&q=80" alt="Denim Shirt">
+                        <h4>Lightweight Denim Shirt</h4>
+                        <p class="price">$24.99</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Row 6: Boys' Trousers -->
+            <section id="boys-trousers" class="product-row-wrapper">
+                <h2>Boys' Trousers</h2>
+                <div class="product-grid">
+                    <div class="product-card">
+                        <img src="https://images.unsplash.com/photo-1519457431-44ccd64a579b?auto=format&fit=crop&w=300&q=80" alt="Jeans">
+                        <h4>Stretch Denim Skinny Jeans</h4>
+                        <p class="price">$26.99</p>
+                    </div>
+                    <div class="product-card">
+                        <img src="https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?auto=format&fit=crop&w=300&q=80" alt="Chinos">
+                        <h4>Slim-Fit Khaki Chinos</h4>
+                        <p class="price">$25.00</p>
+                    </div>
+                    <div class="product-card">
+                        <img src="https://images.unsplash.com/photo-1551854838-212c50b4c184?auto=format&fit=crop&w=300&q=80" alt="Joggers">
+                        <h4>Fleece Comfy Joggers</h4>
+                        <p class="price">$19.99</p>
+                    </div>
+                    <div class="product-card">
+                        <img src="https://images.unsplash.com/photo-1479064555552-3ef4979f8908?auto=format&fit=crop&w=300&q=80" alt="Cargo Pants">
+                        <h4>Adventure Cargo Pants</h4>
+                        <p class="price">$28.99</p>
+                    </div>
+                    <div class="product-card">
+                        <img src="https://images.unsplash.com/photo-1519238263530-99bdd11df2ea?auto=format&fit=crop&w=300&q=80" alt="Corduroy">
+                        <h4>Soft Corduroy Trousers</h4>
+                        <p class="price">$27.50</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Row 7: Girls' Skirts -->
+            <section id="girls-skirts" class="product-row-wrapper">
+                <h2>Girls' Skirts</h2>
+                <div class="product-grid">
+                    <div class="product-card">
+                        <img src="https://images.unsplash.com/photo-1582562124811-c09040d0a901?auto=format&fit=crop&w=300&q=80" alt="Denim Skirt">
+                        <h4>Button-Up Denim Skirt</h4>
+                        <p class="price">$21.99</p>
+                    </div>
+                    <div class="product-card">
+                        <img src="https://images.unsplash.com/photo-1551269901-5c5e14c25df7?auto=format&fit=crop&w=300&q=80" alt="Tutu Skirt">
+                        <h4>Pink Tulle Tutu Skirt</h4>
+                        <p class="price">$19.99</p>
+                    </div>
+                    <div class="product-card">
+                        <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=300&q=80" alt="Plaid Skirt">
+                        <h4>Pleated Plaid Skirt</h4>
+                        <p class="price">$23.50</p>
+                    </div>
+                    <div class="product-card">
+                        <img src="https://images.unsplash.com/photo-1509551388413-e18d0ac5d495?auto=format&fit=crop&w=300&q=80" alt="Floral Skirt">
+                        <h4>Tiered Floral Skirt</h4>
+                        <p class="price">$18.99</p>
+                    </div>
+                    <div class="product-card">
+                        <img src="https://images.unsplash.com/photo-1571908591180-62552a443e69?auto=format&fit=crop&w=300&q=80" alt="Cotton Skirt">
+                        <h4>Organic Cotton Skater Skirt</h4>
+                        <p class="price">$16.99</p>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- SECTION E: FOOTER SECTION -->
+    <footer class="main-footer">
+        <div class="footer-container">
+            <!-- Left Info Block -->
+            <div class="footer-brand">
+                <h4>Children<span>Smart</span></h4>
+                <p>Bringing premium, vibrant, and incredibly soft clothing options to your child's active life adventures.</p>
+            </div>
+            
+            <!-- Center Privacy/Terms Links -->
+            <div class="footer-legal">
+                <h4>Legal & Privacy</h4>
+                <ul>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Cookie Preferences</a></li>
+                </ul>
+            </div>
+
+            <!-- Right Social Media Handles -->
+            <div class="footer-socials">
+                <h4>Follow Our Journey</h4>
+                <div class="social-icons">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="Pinterest"><i class="fab fa-pinterest"></i></a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Standard Copyright Base Row -->
+        <div class="footer-bottom">
+            <p>&copy; 2026 ChildrenSmart Inc. All Rights Reserved. Designed for playful moments.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
