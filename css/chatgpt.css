@@ -464,6 +464,7 @@
 
     .hero-text h1 {
         font-size: 38px;
+        text-align: center;
     }
 
     .hero-text p {
